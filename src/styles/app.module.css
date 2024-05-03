@@ -1,0 +1,15 @@
+.add_formula_btn {
+  margin-left: 1rem !important;
+  padding: 0 !important;
+  min-width: 24px !important;
+}
+
+.formula_input {
+  padding-top: 8px !important;
+  width: 50% !important;
+}
+
+/* .formula_input:active {
+  outline: none !important;
+  border-color: black !important;
+} */
