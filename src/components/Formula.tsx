@@ -3,6 +3,7 @@ import { IFormula } from '../entities/IFormula';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { Chip } from '@mui/material';
+import Box from '@mui/material/Box';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -25,11 +26,15 @@ const Formula = ({ title, result, formula, id }: IFormula) => {
     queryKey: ['repoData'],
     queryFn: () => autocompleteData.get(),
   });
-  const { handleTagChange, resultState, chosenTags } = useTags(data, result, id);
+  const { handleTagChange, resultState, chosenTags } = useTags(
+    data,
+    result,
+    id
+  );
 
   useEffect(() => {
-    setTitleState(title)
-  }, [title])
+    setTitleState(title);
+  }, [title]);
 
   const handleInputChange = (
     event: SyntheticEvent<Element, Event>,
@@ -44,7 +49,7 @@ const Formula = ({ title, result, formula, id }: IFormula) => {
 
   const handleBlur = () => {
     setIsEditing(false);
-    updateFormula(id, titleState)
+    updateFormula(id, titleState);
   };
 
   const handleClick = () => {
@@ -64,14 +69,25 @@ const Formula = ({ title, result, formula, id }: IFormula) => {
           id='panel1-header'
           className={style['formulas_item']}
         >
-          <div style={{width: '100%', display: 'flex', flexDirection: 'column'}}>
-          {isEditing ? (
-            <TextField  className={style['formulas_item-name-input']} label="Standard" variant="standard"  onBlur={handleBlur} onChange={handleChange} value={titleState} autoFocus />
-      ) : (
-        <h4 onClick={handleClick} className={style['formulas_item-name']}>{titleState}</h4>
-
-      )}
-          <span className={style['formulas_item-result']}>{resultState}</span>
+          <div
+            style={{ width: '100%', display: 'flex', flexDirection: 'column' }}
+          >
+            {isEditing ? (
+              <TextField
+                className={style['formulas_item-name-input']}
+                label='Standard'
+                variant='standard'
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={titleState}
+                autoFocus
+              />
+            ) : (
+              <h4 onClick={handleClick} className={style['formulas_item-name']}>
+                {titleState}
+              </h4>
+            )}
+            <span className={style['formulas_item-result']}>{resultState}</span>
           </div>
         </AccordionSummary>
         <AccordionDetails>
@@ -97,13 +113,25 @@ const Formula = ({ title, result, formula, id }: IFormula) => {
                 const tagProps = getTagProps({ index });
                 const { key, ...otherTagProps } = tagProps;
                 return !operands.includes(option) ? (
-                  <Chip
-                    sx={{ bgcolor: 'gray', color: '#eee' }}
-                    variant='outlined'
-                    label={option}
-                    key={key}
-                    {...otherTagProps}
-                  />
+                  <>
+                    <Box
+                      sx={{
+                        bgcolor: 'gray',
+                        color: '#fff',
+                        padding: '.7rem',
+                        borderRadius: '1rem',
+                      }}
+                      key={key}
+                    >
+                      {option}
+                      <span style={{cursor: 'pointer'}}>
+                        {data?.find((item) => item.name === option)?.inputs
+                          ? ' | [' +
+                            data?.find((item) => item.name === option)?.inputs?.trim() + ']'
+                          : ''}
+                      </span>
+                    </Box>
+                  </>
                 ) : (
                   <Chip
                     sx={{ bgcolor: 'transparent' }}
