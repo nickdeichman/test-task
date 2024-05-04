@@ -6,10 +6,54 @@
 
 .formula_input {
   padding-top: 8px !important;
-  width: 50% !important;
+  width: 100% !important;
 }
 
 /* .formula_input:active {
   outline: none !important;
   border-color: black !important;
 } */
+
+.list-item-flex {
+  flex-direction: column !important;
+}
+
+.formulas_top {
+  box-sizing: border-box;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1rem 0;
+  border-bottom: 1px solid black;
+  width: 35%;
+}
+
+
+.formulas_amount {
+  font-size: 1.2rem;
+}
+
+
+.formulas_item  {
+  justify-content: space-between !important;
+}
+
+#accordion {
+  width: 50%;
+}
+
+.formulas_item-name {
+  display: inline-block;
+  font-size: 1rem;
+  background-color: #eee;
+  width: 100%;
+  padding: 1rem;
+  border-bottom: 1px solid #000;
+}
+.formulas_item-name-input {
+  margin-bottom: 1rem !important;
+}
+.formulas_item-result {
+  font-size: 1.5rem;
+}

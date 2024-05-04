@@ -1,6 +1,6 @@
 export interface IFormula {
   title: string;
-  result: number;
+  result: number | string;
   formula: string[];
   id: number;
 }

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './styles/app.module.css';
 import { useFormulasStore } from './store/formulasStore';
 import Button from '@mui/material/Button';
 import Formula from './components/Formula';
+import List from '@mui/material/List';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient()
@@ -13,11 +14,15 @@ function App() {
   const handleAddFormula = () => {
     addFormula();
   };
+  useEffect(() => {
+    console.log(formulas);
+    
+  }, [formulas])
   return (
     <>
-      <div>
+      <div className={styles['formulas_top']}>
         <>
-          <span>{`Formulas (${formulas.length})`}</span>
+          <span className={styles['formulas_amount']}>{`Formulas (${formulas.length})`}</span>
           <Button
             className={styles.add_formula_btn}
             size='small'
@@ -29,11 +34,11 @@ function App() {
         </>
       </div>
       <QueryClientProvider client={queryClient}>
-      <ul>
+      <List>
         {formulas.length
           ? formulas.map((formula) => <Formula key={formula.id} {...formula} />)
           : null}
-      </ul>
+      </List>
       </QueryClientProvider>
     </>
   );
